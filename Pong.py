@@ -9,6 +9,7 @@ pygame.display.set_caption('Pong Game')
 
 point_j1 = 0
 point_j2 = 0
+
 start_time = pygame.time.get_ticks()
 last_point_time = pygame.time.get_ticks()  
 current_time = pygame.time.get_ticks()
@@ -37,6 +38,7 @@ while True:
       joueur1.y -= Joueur_vit_y
     if key[pygame.K_s] and joueur1.bottom < height:
       joueur1.y += Joueur_vit_y
+
     #Droite
     if key[pygame.K_UP] and joueur2.top > 0:
       joueur2.y -= Joueur_vit_y
@@ -52,7 +54,6 @@ while True:
       balle.y += balle_vit_y  
 
     app.fill("black")
-
 
     #Collision
     if balle.top <= 0 or balle.bottom >= height:
@@ -75,6 +76,7 @@ while True:
        balle_vit_y = 4
        last_point_time = pygame.time.get_ticks()  
        print(point_j2,point_j1)
+
     if balle.left >= width:
        point_j2 += 1
        joueur1 = pygame.Rect(50, height // 2 - 70, 10, 140)
@@ -85,9 +87,9 @@ while True:
        last_point_time = pygame.time.get_ticks() 
        print(point_j2,point_j1)
 
-    current_time = pygame.time.get_ticks()
-    if current_time - last_point_time >= 10000:  
     # Augmenter la vitesse de la balle
+    current_time = pygame.time.get_ticks()
+    if current_time - last_point_time >= 10000:
       if balle_vit_x > 0:
         balle_vit_x += 1
       else:
@@ -98,15 +100,12 @@ while True:
         balle_vit_y -= 1
       last_point_time = current_time  # reset le chrono pour la prochaine augmentation
 
-
     Score1 = police.render(str(point_j1),True,"white")
     Score2 = police.render(str(point_j2),True,"white")
     Temps_without_goal = police.render(str(balle_vit_x),True,"white")
     app.blit(Score1, (width // 4, 20))
     app.blit(Score2, (3 * width // 4 - 20, 20))
-    app.blit(Temps_without_goal, (width  -50, 20))
-
-    
+    app.blit(Temps_without_goal, (width  -50, 20))    
 
     pygame.draw.rect(app,"white",joueur1)
     pygame.draw.rect(app,"white",joueur2)
@@ -114,6 +113,3 @@ while True:
 
     pygame.display.flip()
     pygame.time.Clock().tick(60)
-
-            
-    
